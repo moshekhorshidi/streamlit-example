@@ -16,8 +16,6 @@ if st.button("Run Search",type="primary"):
         
         
         try:
-
-            time.sleep(10)
         
             searching_status = st.info("Search in progress. Please wait for data.  :globe_with_meridians:")
 
