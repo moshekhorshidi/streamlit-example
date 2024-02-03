@@ -6,8 +6,20 @@ from webdriver_manager.chrome import ChromeDriverManager
 import time
 import streamlit as st
 
-# Create a Service instance
-chrome_service = Service(ChromeDriverManager().install())
+
+with st.echo():
+    from selenium import webdriver
+    from selenium.webdriver.chrome.options import Options
+    from selenium.webdriver.chrome.service import Service
+    from webdriver_manager.chrome import ChromeDriverManager
+
+    @st.experimental_singleton
+    def get_driver():
+        return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+
+    options = Options()
+    options.add_argument('--disable-gpu')
+    options.add_argument('--headless')
 
 st.title("New York City Zola Plan Search")
 
@@ -17,15 +29,13 @@ if st.button("Run Search",type="primary"):
         
         
         try:
+        
+            driver = get_driver()
+            driver.get("https://zola.planning.nyc.gov/about")
 
-            
+            st.code(driver.page_source)
+                
             searching_status = st.info("Search in progress. Please wait for data.  :globe_with_meridians:")
-
-            # Instantiate the Chrome driver with the Service instance
-            source_page = webdriver.Chrome(service=chrome_service)
-
-            #source_page.get("https://www.nyc.gov/site/planning/zoning/about-zoning.page")
-            source_page.get("https://zola.planning.nyc.gov/about")
             
             time.sleep(5)
             search_line = source_page.find_element(By.ID,'map-search-input')
