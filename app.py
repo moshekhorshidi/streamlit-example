@@ -17,10 +17,13 @@ if st.button("Run Search",type="primary"):
         
         try:
         
-            driver = get_driver()
-            driver.get("https://zola.planning.nyc.gov/about")
+            searching_status = st.info("Search in progress. Please wait for data.  :globe_with_meridians:")
 
-            st.code(driver.page_source)
+            # Instantiate the Chrome driver with the Service instance
+            source_page = webdriver.Chrome(service=chrome_service)
+
+            #source_page.get("https://www.nyc.gov/site/planning/zoning/about-zoning.page")
+            source_page.get("https://zola.planning.nyc.gov/about")
                 
             searching_status = st.info("Search in progress. Please wait for data.  :globe_with_meridians:")
             
