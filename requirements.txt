@@ -1,3 +1,7 @@
-altair
-pandas
 streamlit
+selenium
+selenium.webdriver.common.by
+selenium.webdriver.common.keys
+selenium.webdriver.chrome.service
+webdriver_manager.chrome
+time
