@@ -8,14 +8,11 @@ import time
 import streamlit as st
 
 
-
-webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+source_page = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
 options = Options()
 options.add_argument('--disable-gpu')
 options.add_argument('--headless')
-
-source_page = get_driver()
 
 source_page.get("https://zola.planning.nyc.gov/about")
 
